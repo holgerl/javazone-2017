@@ -4,7 +4,7 @@ window.HL = window.HL || {};
 HL.realtimeData = HL.realtimeData || {}
 
 HL.step = 0;
-HL.realtimeData.maxStep = 8;
+HL.realtimeData.maxStep = 4;
 HL.realtimeData.stepSize = 10;
 HL.realtimeData.stepSpeed = 1/10;
 
