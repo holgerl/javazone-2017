@@ -241,4 +241,5 @@ function makeImage(srcUrl, size, position) {
 	var mesh = new THREE.Mesh(geometry, material);
 	mesh.position.copy(position)
 	HL.scene.add(mesh)
+	return mesh;
 }

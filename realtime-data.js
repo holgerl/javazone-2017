@@ -89,12 +89,32 @@ HL.realtimeData.init = function() {
 	laptop2.scale.set(6, 6, 6);
 	HL.scene.add(laptop2);
 
+	// Step 3
+
+	var bekkStand = makeImage(
+		"/img/bekk-stand.png", 
+		new THREE.Vector3(10.93*3, 7.58*3, 0.1), 
+		new THREE.Vector3(0, 0, 0)
+	);
+	bekkStand.rotation.set(0, Math.PI/4, 0);
+
+	// Step 4
+
+	var bekkStandDetails = new THREE.Object3D();
+	bekkStandDetails.add(makeImage("/img/bekk-stand-knapp.png", new THREE.Vector3(7.58*2, 10.93*2, 0.1), new THREE.Vector3(10, 0, 0)));
+	bekkStandDetails.add(makeImage("/img/bekk-stand-splash.png", new THREE.Vector3(10.93*2, 7.58*2, 0.1), new THREE.Vector3(-10, 8, 0)));
+	bekkStandDetails.add(makeImage("/img/bekk-stand-hardware.png", new THREE.Vector3(10.93*2, 7.58*2, 0.1), new THREE.Vector3(-10, -8, 0)));
+	bekkStandDetails.rotation.set(0, Math.PI/4, 0);
+	HL.scene.add(bekkStandDetails);
+
 	// --
 
 	HL.realtimeData.stepObjects = {
 		0: [],
 		1: [bandArrow, laptop1],
-		2: [server1, server2, server3, laptop2, person1, person2, person3, bandArrow1, bandArrow2, bandArrow3, bandArrow4, bandArrow5, bandArrow6]
+		2: [server1, server2, server3, laptop2, person1, person2, person3, bandArrow1, bandArrow2, bandArrow3, bandArrow4, bandArrow5, bandArrow6],
+		3: [bekkStand],
+		4: [bekkStandDetails]
 	}
 
 	HL.realtimeData.persons = [person1, person2, person3];
