@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+
+		<script src="./lib/three.js"></script>
+		<script src="./util.js"></script>
+
+		<script src="./intro.js"></script>
+		<script src="./agenda.js"></script>
+		<script src="./correlations-intro.js"></script>
+		<script src="./data/stackoverflow-data/stackoverflow-processed.js"></script>
+		<script src="./stackoverflow-in-particles.js"></script>
+		<script src="./astronomical-numbers-intro.js"></script>
+		<script src="./astronomical-numbers.js"></script>
+		<script src="./money-talks-intro.js"></script>
+		<script src="./money-talks.js"></script>
+		<script src="./buzzwords-intro.js"></script>
+		<script src="./data/jz-keywords2.js"></script>
+		<script src="./buzzwords-data.js"></script>
+		<script src="./buzzwords.js"></script>
+		<script src="./outro.js"></script>
+		<script src="./how-webgl-works.js"></script>
+		<script src="./why-performance.js"></script>
+		<script src="./device-support.js"></script>
+		<script src="./realtime-data.js"></script>
+		<script src="./realtime-data-objects.js"></script>
+		<script src="./main.js"></script>
+		
+		<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+
+		<style>
+			@font-face {font-family: 'RobotoLight'; src: url('Roboto-Light.ttf')}
+
+			* {margin: 0px; padding: 0px; overflow: hidden !important;}
+			body {overflow: hidden; width: 100%; background-color: #1d1d1d;}
+
+			@media screen and (max-width: 960px) {
+			    html {
+				        font-size: 5px;
+				    }
+			}
+
+			#warning-message { display: none; }
+			@media only screen and (orientation:portrait) {
+				#warning-message { display: inline-block; width: 70%; top: 30%; left: 15%; position: absolute; }
+				span {display: none;}
+			}
+			@media only screen and (orientation:landscape) {
+				#warning-message { display: none;}
+			}
+			
+			.hidden {display: none;}
+			
+			span {
+				position: absolute;
+			    color: #d1d1d1;
+			    font-size: 2rem;
+			    font-family: RobotoLight;
+			    transform: translateX(-50%) translateY(-50%);
+			    white-space:nowrap;
+			}
+
+			.nocaps {
+			    text-transform: inherit;
+			}
+
+			.year {
+				position: absolute; left: 10%; top: 85%;
+			}
+
+			#bekk, #inparticles, #fagdag, #fagdaginparticles, #statsbudsjettet, .big {font-size: 4rem;}
+
+			.smaller {font-size: 1.5rem;}
+
+			.bigger {font-size: 6rem;}
+			
+			.biggest {font-size: 12rem;}
+
+			.bigish {font-size: 3rem;}
+
+			#akerselva {transform: translateX(-50%) translateY(-50%) rotate(90deg);}
+
+			#videoElement {
+				width: 900px;
+				height: 700px;
+				position: absolute;
+				top: 15%;
+				left: 25%;
+				background-color: #1d1d1d;
+			}
+		</style>
+	</head>
+	<body>
+
+		<img id="warning-message" src="./img/rotate-device.png"/>
+
+		<script type="x-shader/x-vertex" id="bekkInWebGLVertexshader">
+			float easeOutCubic(float t) {
+				t--;
+				return t*t*t + 1.0;
+			}
+
+			uniform float animationTime;
+			uniform float step;
+			uniform float time;
+			attribute vec3 currentPosition;
+			attribute vec3 targetPosition;
+			attribute vec3 color;
+			attribute float deviance;
+			varying float devianceForFragShader;
+			varying vec3 colorForFragShader;
+			attribute vec3 rotationOrigin;
+			uniform float rotationSpeed;
+
+			mat4 rotationMatrix(vec3 axis, float angle) {
+				axis = normalize(axis);
+				float s = sin(angle);
+				float c = cos(angle);
+				float oc = 1.0 - c;
+
+				return mat4(
+					oc * axis.x * axis.x + c,				oc * axis.x * axis.y - axis.z * s,	oc * axis.z * axis.x + axis.y * s,	0.0,
+					oc * axis.x * axis.y + axis.z * s,		oc * axis.y * axis.y + c,			oc * axis.y * axis.z - axis.x * s,	0.0,
+					oc * axis.z * axis.x - axis.y * s,		oc * axis.y * axis.z + axis.x * s,	oc * axis.z * axis.z + c,			0.0,
+					0.0,									0.0,								0.0,								1.0
+				);
+			}
+
+			vec3 rotateAroundOriginAxis(vec3 point, vec3 origin, vec3 axis, float angle) {
+				vec3 diff = origin - point;
+				vec4 rotatedDiff = rotationMatrix(axis, angle) * vec4(diff.x, diff.y, diff.z, 1.0);
+				return rotatedDiff.xyz + origin;
+			}
+
+			void main() {
+				devianceForFragShader = deviance;
+				colorForFragShader = color;
+
+				float devianceIntensity = 2.0;
+
+				float delayedAnimationTime = animationTime;
+				if (step == 1.0) {
+					delayedAnimationTime = animationTime - deviance;
+				}
+
+				float clampedTime = clamp(delayedAnimationTime, 0.0, 1.0);
+				float deviantTime = clampedTime * (1.0 + deviance*devianceIntensity);
+				deviantTime = clamp(deviantTime, 0.0, 1.0);
+				float finalTime = easeOutCubic(deviantTime);
+
+				vec3 newPosition = currentPosition + (targetPosition - currentPosition) * finalTime;
+
+				if (rotationSpeed > 0.0) {
+					float rotationTime = time * rotationSpeed;
+					vec3 rotatedTargetPosition = rotateAroundOriginAxis(targetPosition, rotationOrigin, vec3(0.0, 1.0, 0.0), rotationTime);
+
+					newPosition = currentPosition + (rotatedTargetPosition - currentPosition) * finalTime;
+				}
+
+				vec4 mvPosition = modelViewMatrix * vec4(newPosition, 1.0);
+
+    			//gl_PointSize = 45.0/length(mvPosition.xyz);
+    			gl_PointSize = 45.0/abs(mvPosition.z);
+
+    			if (color.r == 0.0 && color.g == 0.5 && color.b == 1.0) { // High reputation
+    				gl_PointSize *= 1.5; 
+    			}
+
+				gl_Position = projectionMatrix * modelViewMatrix * vec4(newPosition, 1.0);
+			}
+		</script>
+		<script type="x-shader/x-fragment" id="bekkInWebGLFragmentshader">
+			uniform float time;
+			varying float devianceForFragShader;
+			varying vec3 colorForFragShader;
+
+			void main() {
+				vec2 pointCoord = gl_PointCoord;
+				
+				float particleType = 1.0;
+				float alpha;
+				if (particleType == 1.0) {
+					float gradient = 1.0 - length(pointCoord - vec2(0.5, 0.5));
+					if (gradient > 0.5) alpha = 1.0; else alpha = 0.0;
+					if (gradient < 0.6 && gradient > 0.5) alpha = 1.0-(0.6-gradient)/0.1;
+				} else {
+					alpha = 1.0;
+				}
+
+				alpha *= 0.5 + 0.5 * (1.0 + sin(time*5.0 + devianceForFragShader*10.0)) / 2.0;
+
+				gl_FragColor = vec4(colorForFragShader.x, colorForFragShader.y, colorForFragShader.z, alpha);
+			}
+		</script>
+
+		<script type="x-shader/x-vertex" id="moneyTalksVertexShader">
+			attribute float deviance;
+			attribute float deviance2;
+			uniform float releaseSlowdown;
+			uniform float delayReducer;
+			uniform float time;
+			uniform float firstTime;
+			uniform float releaseTime;
+			varying float devianceForFragShader;
+
+			const float PI = 3.1415926535897932384626433832795;
+
+			void main() {
+				devianceForFragShader = deviance2;
+
+				float particleSize = 3.0; // High particle size = Low performance
+
+				vec3 newPosition = vec3(position.x, position.y, position.z);
+				
+				newPosition.y = 100.0;
+
+				float totalTime = 20.0;//20.0;
+				float startTime = deviance * totalTime;
+
+				float ballHeight1 = 4.0;
+				float ballHeight2 = 0.2*deviance2;
+				float ballHeight3 = 0.03*deviance2;
+
+				float acceleration = 3.0;
+
+				if (deviance == 0.0) {
+					ballHeight1 *= 0.05;
+					ballHeight2 *= 0.2;
+					ballHeight3 *= 0.2;
+					acceleration *= 0.4;
+				}
+
+				// time^2 = (2 × distance) / acceleration
+				float hitTime1 = sqrt(2.0 * ballHeight1 / acceleration);
+				float hitTime2 = 2.0 * sqrt(2.0 * ballHeight2 / acceleration);
+				float hitTime3 = 2.0 * sqrt(2.0 * ballHeight3 / acceleration);
+
+				// v^2 = v0^2 + 2 * acceleration * distance
+				float velocity1 = 0.0;
+				float velocity2 = sqrt(2.0 * acceleration * ballHeight2);
+				float velocity3 = sqrt(2.0 * acceleration * ballHeight3);
+
+				float timeDiff = clamp(time - startTime, 0.0, hitTime1 + hitTime2 + hitTime3);
+				if (deviance == 0.0 && firstTime > 0.0) {
+					timeDiff = clamp(firstTime, 0.0, hitTime1 + hitTime2 + hitTime3);
+				}
+
+ 				// y = y0 + v0*t + 1/2*at^2
+				if (timeDiff > 0.0 && timeDiff < hitTime1) {
+					newPosition.y = ballHeight1 - 1.0/2.0 * acceleration * timeDiff * timeDiff;
+				} else if (timeDiff >= hitTime1 && timeDiff < hitTime1 + hitTime2) {
+					float phaseTimeDiff = timeDiff - hitTime1;
+					newPosition.y = velocity2 * phaseTimeDiff - 1.0/2.0 * acceleration * phaseTimeDiff * phaseTimeDiff;
+				} else if (timeDiff >= hitTime2 && timeDiff < hitTime1 + hitTime2 + hitTime3) {
+					float phaseTimeDiff = timeDiff - hitTime1 - hitTime2;
+					newPosition.y = velocity3 * phaseTimeDiff - 1.0/2.0 * acceleration * phaseTimeDiff * phaseTimeDiff;
+				}
+
+				if (timeDiff == hitTime1 + hitTime2 + hitTime3) newPosition.y = 0.0;
+				
+				vec4 mvPosition = modelViewMatrix * vec4(newPosition, 1.0);
+
+    			gl_PointSize = particleSize/length(mvPosition.xyz);
+
+				gl_Position = projectionMatrix * modelViewMatrix * vec4(newPosition, 1.0);
+			}
+		</script>
+
+		<script type="x-shader/x-vertex" id="moneyTalksFragmentShader">
+			uniform float time;
+			varying float devianceForFragShader;
+			void main() {
+				float value = 0.5 + devianceForFragShader * 0.5;
+				gl_FragColor = vec4(value);
+			}
+		</script>
+
+		<script type="x-shader/x-vertex" id="gridVertexShader">
+			uniform float time;
+			void main() {
+				float slowTime = time / 1.0;
+				float maxAmp = 0.1;
+				float amp = sin(slowTime + position.x) * maxAmp;
+				vec3 newPosition = vec3(position.x, amp, position.z);
+				gl_Position = projectionMatrix * modelViewMatrix * vec4(newPosition, 1.0);
+			}
+		</script>
+
+		<script type="x-shader/x-fragment" id="whiteFragmentShader">
+			void main() {
+				gl_FragColor = vec4(1.0, 1.0, 1.0, 1.0);
+			}
+		</script>
+
+		<script type="x-shader/x-vertex" id="noopVertexShader">
+			void main() {
+				gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+			}
+		</script>
+
+		<script type="x-shader/x-vertex" id="particleVertexShader">
+			void main() {
+				float particleSize = 50.0;
+				vec4 mvPosition = modelViewMatrix * vec4(position, 1.0);
+				gl_Position = projectionMatrix * mvPosition;
+    			gl_PointSize = particleSize/gl_Position.w;
+			}
+		</script>
+
+		<script type="x-shader/x-vertex" id="solarSystemVertexShader">
+			varying float orderForFragmentShader;
+			attribute float order;
+
+			void main() {
+				orderForFragmentShader = order;
+
+				float particleSize = 1.18e+13;
+				float multiplier = 5e+3;
+
+				vec4 mvPosition = modelViewMatrix * vec4(position, 1.0);
+				gl_Position = projectionMatrix * mvPosition;
+    			gl_PointSize = particleSize/(gl_Position.w/multiplier);
+			}
+		</script>
+
+		<script type="x-shader/x-fragment" id="solarSystemFragmentShader">
+			uniform float time;
+			varying float orderForFragmentShader;
+
+			void main() {
+				vec2 pointCoord = gl_PointCoord;
+
+				float alpha = 1.0;
+				float gradientAmount = 0.005;
+				float appearSpeed = 0.001 * time * time;
+
+				float gradient = 1.0 - length(pointCoord - vec2(0.5, 0.5));
+				if (gradient > 0.5) alpha = 1.0; else alpha = 0.0;
+				if (gradient < 0.5+gradientAmount && gradient > 0.5-gradientAmount) alpha = 1.0-(0.5+gradientAmount-gradient)/gradientAmount;
+
+				if (time * appearSpeed < orderForFragmentShader) alpha = 0.0;
+
+				gl_FragColor = vec4(0.5, 0.5, 0.5, alpha);
+			}
+		</script>
+
+		<script type="text/javascript">
+			HL.main.main();
+		</script>
+
+		<video autoplay="true" id="videoElement" class="deviceSupportStep18 hidden">
+		 
+		</video>
+	</body>
+</html>
