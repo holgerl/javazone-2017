@@ -20,7 +20,7 @@ HL.intro.initOnce = function() {
 	makeText("med WebGL", null, "big intro", new THREE.Vector3(HL.intro.stepSize, -0.5, 0));
 
 	makeText("Open source", null, "big intro", new THREE.Vector3(HL.intro.stepSize*2 - 1.2, 0, 0));
-	makeText("github.com/holgerl/TODO", null, "intro", new THREE.Vector3(HL.intro.stepSize*2 + 1.2, 0, 0));
+	makeText("holgerl.github.io/javazone-2017", null, "intro", new THREE.Vector3(HL.intro.stepSize*2 + 1.2, 0, 0));
 
 	var dataText = 
 '{"2009":{"8":0.01,"java":0.76,"test":0.2,"spring":0.14,<br/>'+

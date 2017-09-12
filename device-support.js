@@ -33,7 +33,7 @@ HL.deviceSupport.initOnce = function() {
 	HL.deviceSupport.cssTransPosition = new THREE.Vector3(HL.deviceSupport.stepSize*3, -1.5, 0);
 	makeText("CSS Transforms", null, "big deviceSupportStep14 deviceSupportStep15 deviceSupportStep16 deviceSupportStep17", HL.deviceSupport.cssTransPosition);
 
-	makeText("TODO: url til prez", null, "big deviceSupportStep18", new THREE.Vector3(HL.deviceSupport.stepSize*4, 1.5, 0));
+	makeText("holgerl.github.io/javazone-2017", null, "big deviceSupportStep18", new THREE.Vector3(HL.deviceSupport.stepSize*4, 1.5, 0));
 }
 
 HL.deviceSupport.init = function() {
