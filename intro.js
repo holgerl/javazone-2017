@@ -10,14 +10,15 @@ HL.intro.stepSize = 10;
 HL.intro.maxStep = 6;
 
 HL.intro.initOnce = function() {
-	makeText("Visualisering av", null, "big intro", new THREE.Vector3(0, 0.75, 0));
+	makeText("Visualisering av", null, "big intro", new THREE.Vector3(0, 0.65, 0));
 	makeText("en milion datapunkter", null, "big intro", new THREE.Vector3(0, 0.25, 0));
-	makeText("i sanntid", null, "big intro", new THREE.Vector3(0, -0.25, 0));
-	makeText("Holger Ludvigsen", null, "smaller intro", new THREE.Vector3(0, -1, 0));
+	makeText("i sanntid", null, "big intro", new THREE.Vector3(0, -0.15, 0));
+	makeText("Holger Ludvigsen", null, "smaller intro", new THREE.Vector3(0, -0.8, 0));
+	makeText("Bekk Consulting", null, "smaller intro", new THREE.Vector3(0, -0.95, 0));
 
-	makeText("Datavisualisering", null, "big intro", new THREE.Vector3(HL.intro.stepSize, 0.5, 0));
+	makeText("Datavisualisering", null, "big intro", new THREE.Vector3(HL.intro.stepSize, 0.4, 0));
 	makeText("i tre dimensjoner", null, "big intro", new THREE.Vector3(HL.intro.stepSize, 0, 0));
-	makeText("med WebGL", null, "big intro", new THREE.Vector3(HL.intro.stepSize, -0.5, 0));
+	makeText("med WebGL", null, "big intro", new THREE.Vector3(HL.intro.stepSize, -0.4, 0));
 
 	makeText("Open source", null, "big intro", new THREE.Vector3(HL.intro.stepSize*2 - 1.2, 0, 0));
 	makeText("holgerl.github.io/javazone-2017", null, "intro", new THREE.Vector3(HL.intro.stepSize*2 + 1.2, 0, 0));
@@ -37,8 +38,8 @@ HL.intro.initOnce = function() {
 
 	var node = makeText("", null, "smaller intro", new THREE.Vector3(HL.intro.stepSize*3 - 1.5, -0.25, 0));
 	node.innerHTML = dataText;
-	makeText("data", null, "bigger intro", new THREE.Vector3(HL.intro.stepSize*3 - 1.5, 1.25, 0));
-	makeText("visualisering", null, "bigger intro", new THREE.Vector3(HL.intro.stepSize*3 + 1.5, 1.25, 0));
+	makeText("data", null, "bigger intro", new THREE.Vector3(HL.intro.stepSize*3 - 1.5, 1.05, 0));
+	makeText("visualisering", null, "bigger intro", new THREE.Vector3(HL.intro.stepSize*3 + 1.5, 1.05, 0));
 
 	makeText("Grav frem", null, "big intro", new THREE.Vector3(HL.intro.stepSize*4 - 1.5, 0.75, 0));
 	makeText("budskapet i dataene", null, "big intro", new THREE.Vector3(HL.intro.stepSize*4 - 1.5, 0.25, 0));
