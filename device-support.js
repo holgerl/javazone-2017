@@ -195,8 +195,10 @@ HL.deviceSupport.animate = function() {
 }
 
 HL.deviceSupport.cleanup = function() {
-	var track = HL.stream.getTracks()[0];
-	track.stop();
+	if (HL.stream) {		
+		var track = HL.stream.getTracks()[0];
+		track.stop();	
+	}
 	HL.util.addAndRemoveClass("video", "foobar", "hidden");
 }
 
