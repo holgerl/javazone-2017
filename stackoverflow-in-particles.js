@@ -30,7 +30,7 @@ HL.stackoverflowInParticles.initOnce = function() {
 
 	makeText(HL.minStartDate.getFullYear(), "stackoverflow", "bigish stackoverflowstep2 stackoverflowstep4 stackoverflowstep7 stackoverflowstep9", new THREE.Vector3(-4.5, -2.25, 0));
 	makeText(HL.maxStartDate.getFullYear(), "stackoverflowInParticles", "bigish stackoverflowstep2 stackoverflowstep4 stackoverflowstep7 stackoverflowstep9", new THREE.Vector3(4.5, -2.25, 0));
-	makeText("Startdato", "stackoverflowInParticles", "bigish stackoverflowstep2 stackoverflowstep4 stackoverflowstep7 stackoverflowstep9", new THREE.Vector3(0, 2.5, 0));
+	makeText("Registererte seg", "stackoverflowInParticles", "bigish stackoverflowstep2 stackoverflowstep4 stackoverflowstep7 stackoverflowstep9", new THREE.Vector3(0, 2.5, 0));
 
 	function agePosition(age) {
 		let diffAge = HL.maxAge - HL.minAge;
