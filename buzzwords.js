@@ -6,6 +6,8 @@ HL.buzzwords = HL.buzzwords || {}
 
 HL.step = 0;
 
+var buzzWordTextElements = {};
+
 HL.buzzwords.initOnce = function() {
 	HL.buzzwords.words = [];
 
@@ -18,6 +20,7 @@ HL.buzzwords.initOnce = function() {
 		node.appendChild(textnode);
 		document.getElementsByTagName("body")[0].appendChild(node);
 		HL.buzzwords.words.push(node);
+		buzzWordTextElements[index] = node;
 	}
 
 
@@ -95,15 +98,14 @@ var makeColumn = function() {
 HL.buzzwords.red = new THREE.Color(1, 0.5, 0.5);
 HL.buzzwords.green = new THREE.Color(0.5, 1, 0.5);
 
+var buzzRed = new THREE.Color(1, 0.3, 0.3);
+var buzzGreen = new THREE.Color(0.1, 1, 0.1);
+
 HL.buzzwords.animate = function() {
 	var year = 2008 + HL.step;
 	var hype = HL.buzzwords.hype[year];
 	var lastYearHypes = HL.buzzwords.hype[year-1] || {};
-	var adjustmentSpeed = 1/200; // 1/300;
-
-	document.querySelectorAll('.buzzword').forEach(function(element) {
-		element.classList.remove('hidden');
-	});
+	var adjustmentSpeed = 1/300; // 1/300;
 
 	for (var key in HL.buzzwords.indecies) {
 		var i = HL.buzzwords.indecies[key];
@@ -127,12 +129,12 @@ HL.buzzwords.animate = function() {
 		//column.material.color = currentHype - lastYearHype < 0 ? HL.buzzwords.red : HL.buzzwords.green;
 		let hypeRelative = Math.max((currentHype - lastYearHype)*currentHype, 0);
 		//let hypeRelative = (currentHype/lastYearHype - 0.5) / 10;
-		column.material.color =  new THREE.Color(1, 0.3, 0.3).lerp(new THREE.Color(0.1, 1, 0.1), hypeRelative)
+		column.material.color = buzzRed.clone().lerp(buzzGreen, hypeRelative)
 		column.material.needsUpdate = true;
 
 		var labelPosition = column.position.clone();
 		//labelPosition.y += 0.2;
-		var element = document.getElementById("buzzword" + i);
+		var element = buzzWordTextElements[i];
 		HL.util.setHTMLElementPosition(element, labelPosition, HL.camera);
 		var fontSizeFactor = 40;
 		var fontSize = column.hype * fontSizeFactor;
@@ -174,4 +176,8 @@ HL.buzzwords.maxStep = 2017-2008;
 
 HL.buzzwords.doStep = function() {
 	HL.animationStart = new Date().getTime();
+
+	document.querySelectorAll('.buzzword').forEach(function(element) {
+		element.classList.remove('hidden');
+	});
 }
