@@ -131,11 +131,11 @@ var setupKeyListener = function(domElement) {
 		e.preventDefault();
 		e.stopPropagation();
 
-		if (e.clientY > window.innerHeight * 0.9) {
+		if (e.clientY > window.innerHeight * 0.85) {
 			switchAct(1);
-		} else if (e.clientY < window.innerHeight * 0.1) {
+		} else if (e.clientY < window.innerHeight * 0.15) {
 			switchAct(-1);
-		} else if (e.clientX < window.innerWidth * 0.1) {
+		} else if (e.clientX < window.innerWidth * 0.15) {
 			switchStep(-1);
 		} else {
 			switchStep(1);
