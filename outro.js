@@ -13,9 +13,11 @@ HL.outro.initOnce = function() {
 	makeText("WebGL", null, "bigger outro", new THREE.Vector3(0, 0, 0));
 	makeText("Fantastique", null, "big outro", new THREE.Vector3(0, -0.5, 0));
 
-	makeText("Sp&oslash;rsm&aring;l?", null, "big outro", new THREE.Vector3(HL.outro.stepSize, 0, 0));
+	makeText("Sp&oslash;rsm&aring;l?", null, "big outro", new THREE.Vector3(HL.outro.stepSize, 0.25, 0));
+	makeText("@holgerludvigsen", null, "outro", new THREE.Vector3(HL.outro.stepSize, -0.25, 0));
 	
-	makeText("Takk for meg!", null, "big outro", new THREE.Vector3(HL.outro.stepSize*2, 0, 0));
+	makeText("Takk for meg!", null, "bigger outro", new THREE.Vector3(HL.outro.stepSize*2, 0.25, 0));
+	makeText("@holgerludvigsen", null, "outro", new THREE.Vector3(HL.outro.stepSize*2, -0.25, 0));
 }
 
 HL.outro.init = function() {
