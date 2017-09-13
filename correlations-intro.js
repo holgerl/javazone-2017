@@ -15,7 +15,8 @@ HL.correlationsIntro.initOnce = function() {
 	makeText("Stack Overflow", null, "big correlationsIntro", new THREE.Vector3(HL.correlationsIntro.stepSize, 1, 0));
 	
 	makeText("Google BigQuery", null, "big correlationsIntro", new THREE.Vector3(HL.correlationsIntro.stepSize*2, 0.25, 0));
-	makeText("cloud.google.com/bigquery/public-data/stackoverflow", null, "smaller correlationsIntro", new THREE.Vector3(HL.correlationsIntro.stepSize*2, -0.25, 0));
+	makeText("150 GB", null, "big correlationsIntro", new THREE.Vector3(HL.correlationsIntro.stepSize*2, -0.1, 0));
+	makeText("cloud.google.com/bigquery/public-data/stackoverflow", null, "smaller correlationsIntro", new THREE.Vector3(HL.correlationsIntro.stepSize*2, -0.35, 0));
 }
 
 HL.correlationsIntro.init = function() {
