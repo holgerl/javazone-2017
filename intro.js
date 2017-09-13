@@ -91,6 +91,24 @@ HL.intro.init = function() {
 	line.material.transparent = true;
 	HL.scene.add(line)
 
+	var webGeometry = new THREE.OctahedronGeometry(1.25, 3);
+	var wireframe = new THREE.Mesh(webGeometry, new THREE.MeshBasicMaterial({wireframe: true, transparent: false, color: new THREE.Color(0x0B0B0B), opacity: 0.05}));
+	var web = new THREE.Object3D();
+	web.add(wireframe);
+	var dotGeometry = new THREE.OctahedronGeometry(0.015, 1);
+	var dotMaterial = new THREE.MeshBasicMaterial({transparent: false, color: new THREE.Color(0x0B0B0B), opacity: 0.25});
+	for (var vertex of webGeometry.vertices) {
+		var noiseAmount = 0.2;
+		vertex.add(new THREE.Vector3(Math.random()*2-1, Math.random()*2-1, Math.random()*2-1).multiplyScalar(noiseAmount));
+		vertex.multiply(new THREE.Vector3(1.5, 1, 1.5));
+		var dot = new THREE.Mesh(dotGeometry, dotMaterial);
+		dot.position.copy(vertex);
+		web.add(dot);
+
+	}
+	HL.scene.add(web);
+	HL.intro.web = web;
+
 	var light = new THREE.DirectionalLight();
 	light.position.set(2, 8, 3);
 	HL.scene.add(light);
@@ -115,6 +133,8 @@ HL.intro.animate = function() {
 
 	HL.intro.rotatingBox.rotation.z += 0.003;
 	HL.intro.rotatingBox.rotation.y = 1;
+
+	HL.intro.web.rotation.y += 0.0002;
 }
 
 HL.intro.cleanup = function() {
