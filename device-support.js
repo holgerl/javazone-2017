@@ -200,6 +200,9 @@ HL.deviceSupport.cleanup = function() {
 		track.stop();	
 	}
 	HL.util.addAndRemoveClass("video", "foobar", "hidden");
+
+	HL.deviceSupport.boxes = [];
+	HL.deviceSupport.dust = [];
 }
 
 HL.deviceSupport.doStep = function() {
@@ -208,9 +211,9 @@ HL.deviceSupport.doStep = function() {
 	if (HL.step >= 1 && HL.step < 2 + HL.deviceSupport.browsers.length)
 		HL.util.addAndRemoveClass("span", ".deviceSupportStep1plus", "hidden");
 
-	for (let box of HL.deviceSupport.boxes) {
-		box.visible = HL.step > 1;
-	}
+	//for (let box of HL.deviceSupport.boxes) {
+	//	box.visible = HL.step > 1;
+	//}
 
 	var video = document.querySelector("#videoElement");
 
