@@ -4,9 +4,10 @@ window.HL = window.HL || {};
 HL.deviceSupport = HL.deviceSupport || {}
 
 HL.step = 0;
-HL.deviceSupport.maxStep = 42;
+HL.deviceSupport.maxStep = 18;
 HL.deviceSupport.stepSize = 10;
 HL.deviceSupport.stepSpeed = 1/10;
+HL.deviceSupport.oneway = true;
 
 HL.deviceSupport.browsers = [
 	"Firefox", "Chrome", "IE", "Edge", "Safari", "Opera", "iOS Safari", "Opera Mini", "Android Browser", "Android Chrome", "Firefox for Android", "iOS Chrome"

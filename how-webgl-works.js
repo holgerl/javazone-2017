@@ -4,7 +4,7 @@ window.HL = window.HL || {};
 HL.howWebGLWorks = HL.howWebGLWorks || {}
 
 HL.step = 0;
-HL.howWebGLWorks.maxStep = 8;
+HL.howWebGLWorks.maxStep = 4;
 HL.howWebGLWorks.stepSize = 10;
 HL.howWebGLWorks.stepSpeed = 1/10;
 

@@ -6,6 +6,8 @@ HL.astronomicalNumbers = {}
 
 HL.step = 0;
 
+HL.astronomicalNumbers.oneway = true;
+
 /*
 Postgirobygget: 288 x 473   139 x 473   0.23678    =  68x112x33
 */
@@ -294,7 +296,11 @@ HL.astronomicalNumbers.animate = function() {
 }
 
 HL.astronomicalNumbers.cleanup = function() {
+	HL.animationTime = 0;
+	HL.timeSpeed = 0;
 
+	HL.horizontalSpeed = 0;
+	HL.verticalSpeed = 0;
 }
 
 HL.astronomicalNumbers.steps = {

@@ -5,7 +5,6 @@ window.HL = window.HL || {};
 HL.moneyTalks = {}
 
 HL.step = 0;
-HL.lastStep = 0;
 
 HL.firstTimeStart = 0;
 
@@ -171,7 +170,7 @@ HL.moneyTalks.steps = {
 	}*/
 }
 
-HL.moneyTalks.maxStep = Object.keys(HL.moneyTalks.steps).length;
+HL.moneyTalks.maxStep = Object.keys(HL.moneyTalks.steps).length - 1;
 
 HL.moneyTalks.doStep = function() {
 	var step = HL.moneyTalks.steps[HL.step];
@@ -182,6 +181,8 @@ HL.moneyTalks.doStep = function() {
 	HL.timeStart = new Date().getTime();
 
 	if (HL.step == 1) HL.firstTimeStart = new Date().getTime();
+	if (HL.step < 1) window.uniforms.firstTime.value = 0;
+	if (HL.step < 2) window.uniforms.time.value = 0;
 
 	HL.stepStart = new Date().getTime();
 

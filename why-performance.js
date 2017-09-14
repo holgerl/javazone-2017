@@ -4,7 +4,7 @@ window.HL = window.HL || {};
 HL.whyPerformance = HL.whyPerformance || {}
 
 HL.step = 0;
-HL.whyPerformance.maxStep = 8;
+HL.whyPerformance.maxStep = 6;
 HL.whyPerformance.stepSize = 10;
 HL.whyPerformance.stepSpeed = 1/10;
 

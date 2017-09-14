@@ -96,8 +96,9 @@ var setupKeyListener = function(domElement) {
 	function switchStep(dir) {
 		var act = HL.acts[HL.act];
 
+		if (act.oneway && (dir == -1 || HL.step == act.maxStep)) return;
+
 		HL.lastStep = HL.step;
-		//if (HL.step == act.maxStep && dir == 1) return;
 
 		HL.step += dir;
 		if (HL.step < 0) HL.step = act.maxStep;
