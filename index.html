@@ -89,11 +89,20 @@
 				left: 25%;
 				background-color: #1d1d1d;
 			}
+
+			#arrowkeys {
+				right: 5%; 
+				bottom: 5%; 
+				position: absolute;
+				opacity: 0.4;
+				width: 6rem;
+			}
 		</style>
 	</head>
 	<body>
 
-		<img id="warning-message" src="./img/rotate-device.png"/>
+		<img id="warning-message" src="img/rotate-device.png"/>
+		<img id="arrowkeys" src="img/arrowkeys.png"/>
 
 		<script type="x-shader/x-vertex" id="bekkInWebGLVertexshader">
 			float easeOutCubic(float t) {
