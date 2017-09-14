@@ -140,7 +140,7 @@ var makeOsloOmradet= function() {
 	var geometry = new THREE.BoxGeometry(36880, 19260, 10);
 	HL.geometry = geometry;
 	
-	var texture = new THREE.TextureLoader().load("/img/oslo3.png");
+	var texture = new THREE.TextureLoader().load("img/oslo3.png");
 	texture.needsUpdate = true;
 	
 	var material = new THREE.MeshLambertMaterial({color: 0xFFFFFF, map : texture});

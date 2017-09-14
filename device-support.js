@@ -47,7 +47,7 @@ HL.deviceSupport.init = function() {
 	let spreadY = 0.5;
 
 	for (let browser of HL.deviceSupport.browsers) {
-		var texture = new THREE.TextureLoader().load("./img/browsers/"+browser+".png");
+		var texture = new THREE.TextureLoader().load("img/browsers/"+browser+".png");
 		texture.needsUpdate = true;
 		texture.anisotropy = true;
 
@@ -67,7 +67,7 @@ HL.deviceSupport.init = function() {
 		HL.deviceSupport.boxes.push(box);
 	}
 
-	var texture = new THREE.TextureLoader().load("./img/cloud4.png");
+	var texture = new THREE.TextureLoader().load("img/cloud4.png");
 	texture.needsUpdate = true;
 	texture.anisotropy = true;
 	let cloud = new THREE.Mesh(new THREE.BoxGeometry(1.5+0.6, 0.3+0.2, 0.001), 
