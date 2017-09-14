@@ -116,15 +116,14 @@ var makePostGiroBygget = function() {
 
 	var material = new THREE.MeshLambertMaterial({color: 0x7C624D});
 
+	var geometry = new THREE.BoxGeometry(33+0.1, 2, 33+0.1);
+	geometry.faces.splice(4,2);
+
 	for (let i = 0; i < 20; i++) {
-		var geometry = new THREE.BoxGeometry(33+0.1, 2, 33+0.1);
-		geometry.faces.splice(4,2);
 		var mesh = new THREE.Mesh(geometry, material);
 		mesh.position.set(-27, -50 + 4*i, 0);
 		bygget.add(mesh);
 
-		var geometry = new THREE.BoxGeometry(33+0.1, 2, 33+0.1);
-		geometry.faces.splice(4,2);
 		var mesh = new THREE.Mesh(geometry, material);
 		mesh.position.set(13, -50 + 4*i, 0);
 		bygget.add(mesh);
