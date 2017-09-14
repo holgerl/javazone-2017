@@ -87,11 +87,11 @@ HL.buzzwords.init = function() {
 	HL.scene.add(light3);
 }
 
+var columnGeometry = new THREE.SphereGeometry(0.2, 100, 50);
+
 var makeColumn = function() {
-	var geometry = new THREE.SphereGeometry(0.2, 100, 50);
-	HL.geometry = geometry;
-	var material = new THREE.MeshLambertMaterial({color: 0xFFFFFF, opacity: 0.5, transparent: true});
-	var mesh = new THREE.Mesh(geometry, material);
+	var columnMaterial = new THREE.MeshLambertMaterial({color: 0xFFFFFF, opacity: 0.5, transparent: true});
+	var mesh = new THREE.Mesh(columnGeometry, columnMaterial);
 	return mesh;
 }
 
