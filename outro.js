@@ -41,7 +41,7 @@ HL.outro.cleanup = function() {
 
 }
 
-HL.outro.maxStep = 3;
+HL.outro.maxStep = 2;
 
 HL.outro.doStep = function() {
 	HL.util.addAndRemoveClass("span", '.outro', "hidden");
