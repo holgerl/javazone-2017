@@ -32,7 +32,7 @@ HL.howWebGLWorks.init = function() {
 	HL.camera.fov = 40;
 	HL.camera.updateProjectionMatrix();
 
-	makeImage("/img/canvas-on-page.png", new THREE.Vector3(4.4/3, 5.2/3, 0.01), new THREE.Vector3(HL.howWebGLWorks.stepSize - 1.5, 0, 0));
+	makeImage("img/canvas-on-page.png", new THREE.Vector3(4.4/3, 5.2/3, 0.01), new THREE.Vector3(HL.howWebGLWorks.stepSize - 1.5, 0, 0));
 
 	var light = new THREE.DirectionalLight();
 	light.position.set(3, 5, 8);

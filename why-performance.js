@@ -46,11 +46,11 @@ HL.whyPerformance.init = function() {
 	HL.camera.fov = 40;
 	HL.camera.updateProjectionMatrix();
 
-	makeImage("/img/cpu-vs-gpu.png", new THREE.Vector3(9.6/3, 5.4/3, 0.1), new THREE.Vector3(HL.whyPerformance.stepSize, 0.25, 0));
+	makeImage("img/cpu-vs-gpu.png", new THREE.Vector3(9.6/3, 5.4/3, 0.1), new THREE.Vector3(HL.whyPerformance.stepSize, 0.25, 0));
 
-	makeImage("/img/trehjul.jpg", new THREE.Vector3(5.6/2, 5.25/2, 0.1), new THREE.Vector3(HL.whyPerformance.stepSize*5, -0.2, 0));
+	makeImage("img/trehjul.jpg", new THREE.Vector3(5.6/2, 5.25/2, 0.1), new THREE.Vector3(HL.whyPerformance.stepSize*5, -0.2, 0));
 
-	makeImage("/img/ninja.jpg", new THREE.Vector3(6.56/2, 4.92/2, 0.1), new THREE.Vector3(HL.whyPerformance.stepSize*6, -0.2, 0));
+	makeImage("img/ninja.jpg", new THREE.Vector3(6.56/2, 4.92/2, 0.1), new THREE.Vector3(HL.whyPerformance.stepSize*6, -0.2, 0));
 
 	var light = new THREE.DirectionalLight();
 	light.position.set(3, 5, 8);

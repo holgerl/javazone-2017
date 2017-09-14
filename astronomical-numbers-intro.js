@@ -23,8 +23,8 @@ HL.astronomicalNumbersIntro.init = function() {
 	HL.camera.fov = 40;
 	HL.camera.updateProjectionMatrix();
 
-	makeImage("/img/moondata.png", new THREE.Vector3(0.65*2, 1.4*2, 0.1), new THREE.Vector3(HL.astronomicalNumbersIntro.stepSize + 1, 0, 0));
-	makeImage("/img/happy-planets.jpg", new THREE.Vector3(12.8/4, 7.2/4, 0.1), new THREE.Vector3(HL.astronomicalNumbersIntro.stepSize*2 + 1, 0, 0));
+	makeImage("img/moondata.png", new THREE.Vector3(0.65*2, 1.4*2, 0.1), new THREE.Vector3(HL.astronomicalNumbersIntro.stepSize + 1, 0, 0));
+	makeImage("img/happy-planets.jpg", new THREE.Vector3(12.8/4, 7.2/4, 0.1), new THREE.Vector3(HL.astronomicalNumbersIntro.stepSize*2 + 1, 0, 0));
 
 	var light = new THREE.DirectionalLight();
 	light.position.set(3, 5, 8);

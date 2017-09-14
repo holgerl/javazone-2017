@@ -92,7 +92,7 @@ HL.realtimeData.init = function() {
 	// Step 3
 
 	var bekkStand = makeImage(
-		"/img/bekk-stand.jpg", 
+		"img/bekk-stand.jpg", 
 		new THREE.Vector3(13*3, 11*3, 0.03), 
 		new THREE.Vector3(0, 0, 0)
 	);
@@ -101,9 +101,9 @@ HL.realtimeData.init = function() {
 	// Step 4
 
 	var bekkStandDetails = new THREE.Object3D();
-	bekkStandDetails.add(makeImage("/img/bekk-stand-knapp.jpg", new THREE.Vector3(7.5*2, 10*2, 0.03), new THREE.Vector3(10, 0, 0)));
-	bekkStandDetails.add(makeImage("/img/bekk-stand-splash.png", new THREE.Vector3(13.3*1.5, 10*1.5, 0.03), new THREE.Vector3(-10, 8, 0)));
-	bekkStandDetails.add(makeImage("/img/bekk-stand-hardware.jpg", new THREE.Vector3(13.3*1.5, 10*1.5, 0.03), new THREE.Vector3(-10, -8, 0)));
+	bekkStandDetails.add(makeImage("img/bekk-stand-knapp.jpg", new THREE.Vector3(7.5*2, 10*2, 0.03), new THREE.Vector3(10, 0, 0)));
+	bekkStandDetails.add(makeImage("img/bekk-stand-splash.png", new THREE.Vector3(13.3*1.5, 10*1.5, 0.03), new THREE.Vector3(-10, 8, 0)));
+	bekkStandDetails.add(makeImage("img/bekk-stand-hardware.jpg", new THREE.Vector3(13.3*1.5, 10*1.5, 0.03), new THREE.Vector3(-10, -8, 0)));
 	bekkStandDetails.rotation.set(0, Math.PI/4, 0);
 	HL.scene.add(bekkStandDetails);
 

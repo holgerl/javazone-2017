@@ -19,8 +19,8 @@ HL.moneyTalksIntro.init = function() {
 	HL.camera.fov = 40;
 	HL.camera.updateProjectionMatrix();
 
-	makeImage("/img/siv.jpg", new THREE.Vector3(9/4, 6/4, 0.1), new THREE.Vector3(HL.moneyTalksIntro.stepSize*2 - 1.5, 0, 0));
-	makeImage("/img/statsbudsjettet.png", new THREE.Vector3(8.59/3, 8.85/3, 0.1), new THREE.Vector3(HL.moneyTalksIntro.stepSize*2 + 1.5, 0, 0));
+	makeImage("img/siv.jpg", new THREE.Vector3(9/4, 6/4, 0.1), new THREE.Vector3(HL.moneyTalksIntro.stepSize*2 - 1.5, 0, 0));
+	makeImage("img/statsbudsjettet.png", new THREE.Vector3(8.59/3, 8.85/3, 0.1), new THREE.Vector3(HL.moneyTalksIntro.stepSize*2 + 1.5, 0, 0));
 
 	var light = new THREE.DirectionalLight();
 	light.position.set(3, 5, 8);
